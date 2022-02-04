@@ -1,0 +1,9 @@
+Dummy data för discover:
+    en lista som innehåller några maträtter
+    varje maträtt innehåller:
+        titel
+        instruktioner
+        pris
+        bild
+
+        ["bildnamn", titel, instruktioner, pris]
