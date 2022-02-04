@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { StyleSheet, Text, View, TextInput, Animated, Dimensions, Image } from "react-native";
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import DiscoverScreen from './discover';
 import LikesScreen from './likes';
@@ -10,7 +11,7 @@ const Tab = createMaterialTopTabNavigator();
 
 export default function navBar() {
     return (
-        <Tab.Navigator>
+        <Tab.Navigator swipeEnabled={false}>
             <Tab.Screen name="Discover" component={DiscoverScreen} />
             <Tab.Screen name="Likes" component={LikesScreen} />
             <Tab.Screen name="Cookbook" component={CookbookScreen} />

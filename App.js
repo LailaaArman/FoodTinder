@@ -6,18 +6,20 @@ import NavBar from './components/navBar';
 
 
 
-
-
 export default function App() {
-
   return (
-    <NavigationContainer>
-      <NavBar />
-    </NavigationContainer>
+    <View style={styles.container}>
+      <NavigationContainer>
+        <NavBar />
+      </NavigationContainer>
+    </View>
+    
   );
 }
 
 
 const styles = StyleSheet.create({
-
+  container: {
+    flex: 1,
+  }
 });
