@@ -5,6 +5,7 @@ export const addDish = (dish) => ({
     data: dish
 })
 
-export const deleteDish = () => ({
+export const deleteDish = (key) => ({
     type: DELETE_DISH,
+    key: key
 })
