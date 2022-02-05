@@ -1,30 +1,11 @@
 import { StyleSheet, Text, View, TextInput, Animated, Dimensions, Image, } from "react-native";
 import React, { useState } from 'react';
 import {PanGestureHandler} from 'react-native-gesture-handler';
+import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { addDish } from '../src/actions/dish'
 
-let dishes = [
-  {
-    id: 0,
-    name: "tacos",
-    price: "80kr",
-    instructions: "slice some cucumber",
-    uri: require("../assets/dishes/tacos.jpg"),
-  },
-  {
-    id: 1,
-    name: "Stuvade makaroner",
-    price: "70kr",
-    instructions: "stuva makaronerna",
-    uri: require("../assets/dishes/stuvademakaroner.jpg"),
-  },
-  {
-    id: 2,
-    name: "Ris med wok",
-    price: "85kr",
-    instructions: "wooka grönsakerna",
-    uri: require("../assets/dishes/wok.jpeg"),
-  },
-];
+
 
 const SCREEN_HEIGHT = Dimensions.get("window").height;
 const SCREEN_WIDTH = Dimensions.get("window").width;
@@ -32,20 +13,27 @@ const SCREEN_WIDTH = Dimensions.get("window").width;
 
 
 function renderDishes() {
+
+  const dishes = useSelector((state) => state.dishReducer.dishes)
+  const selectedDishes = useSelector((state) => state.dishReducer.likedDishes)
+  const dispatch = useDispatch();
   const [dish, setDish] = useState(dishes[0]);
   let index = dish.id;
   const handleSwipe=({nativeEvent}) =>{
       //swiping right
       if(nativeEvent.translationX < -225){
         console.log("Swiped Right")
+        dispatch(addDish(dish))
         index++
         setDish(dishes[index%3])
+        console.log(selectedDishes);
       }
       //swiping left
       else if(nativeEvent.translationX > 225){
         console.log("Swiped Left")
         index++
         setDish(dishes[index%3])
+        console.log(selectedDishes);
       }
     }
     
