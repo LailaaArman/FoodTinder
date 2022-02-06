@@ -1,9 +1,10 @@
-import { StyleSheet, Text, View, TextInput, Animated, Dimensions, Image, } from "react-native";
+import { StyleSheet, Text, View, TextInput, Animated, Dimensions, Image, Button } from "react-native";
 import React, { useState } from 'react';
 import {PanGestureHandler} from 'react-native-gesture-handler';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { addDish } from '../src/actions/dish'
+import { FontAwesome } from '@expo/vector-icons';
 
 
 
@@ -57,6 +58,22 @@ function renderDishes() {
       }
       
     }
+    
+    const like = () => {
+      let index = dish.id;
+      console.log("Liked")
+      dispatch(addDish(dish))
+      index++
+      setDish(dishes[index])
+    }
+
+    const dislike = () => {
+      let index = dish.id;
+      console.log("Disliked")
+      index++
+      setDish(dishes[index])
+    }
+
     if (dish != undefined) {
       return (
         <PanGestureHandler onHandlerStateChange={handleSwipe}>
@@ -78,10 +95,14 @@ function renderDishes() {
               }}
               source={dish.uri}
             />
-            <Text>
+            <Text style={{color: 'white'}}>
               <div>{dish.price}</div>
               <div>{dish.instructions}</div>
             </Text>
+            <View style={styles.buttons}>
+              <FontAwesome name="remove" size={24} color="white" onPress={() => dislike()} />
+              <FontAwesome name="heart-o" size={24} color="white" onPress={() => like()}/>
+            </View>    
           </Animated.View>
         </PanGestureHandler>
       );
@@ -122,5 +143,13 @@ const styles = StyleSheet.create({
         flex: 1, 
         justifyContent: "center", 
         alignItems: "center"
+    },
+    buttons: {
+      flex: 1, 
+      flexDirection: "row",
+      justifyContent: "space-between",
+      width: "90%",
+      paddingLeft: 50,
+      paddingRight: 50
     }
 })
