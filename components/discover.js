@@ -1,10 +1,11 @@
-import { StyleSheet, Text, View, TextInput, Animated, Dimensions, Image, Button } from "react-native";
+import { StyleSheet, Text, View, TextInput, Animated, Dimensions, Image, Button, TouchableHighlight } from "react-native";
 import React, { useState } from 'react';
 import {PanGestureHandler} from 'react-native-gesture-handler';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { addDish } from '../src/actions/dish'
 import { FontAwesome } from '@expo/vector-icons';
+import DetailsScreen from './details'
 
 
 
@@ -37,6 +38,7 @@ const dishes = [
 
 function renderDishes() {
   const [dish, setDish] = useState(dishes[0]);
+  const [showDetailsView, setShowDishDetails] = useState(false);
   const dispatch = useDispatch();
   
   const handleSwipe=({nativeEvent}) =>{
@@ -74,6 +76,17 @@ function renderDishes() {
       setDish(dishes[index])
     }
 
+    const showDetails = (dish) => {
+      console.log(dish);
+      setShowDishDetails(true);
+    }
+
+    if(showDetailsView) {
+      return (
+        <DetailsScreen setShowDishDetails={(p) => setShowDishDetails(p)} dish={dish}/>
+      )
+    }
+
     if (dish != undefined) {
       return (
         <PanGestureHandler onHandlerStateChange={handleSwipe}>
@@ -87,14 +100,17 @@ function renderDishes() {
               backgroundColor: "#6D49CF",
             }}
           >
-            <Image
-              style={{
-                height: 400,
-                width: 500,
-                borderRadius: 20,
-              }}
-              source={dish.uri}
-            />
+            <TouchableHighlight onPress={() => showDetails(dish)}>
+              <Image
+                style={{
+                  height: 400,
+                  width: 500,
+                  borderRadius: 20,
+                }}
+                source={dish.uri}
+              />
+            </TouchableHighlight>
+            
             <Text style={{color: 'white'}}>
               <div>{dish.price}</div>
               <div>{dish.instructions}</div>
