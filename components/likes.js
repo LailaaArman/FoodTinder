@@ -1,28 +1,41 @@
-import { StyleSheet, Text, View, TextInput, Button, FlatList} from 'react-native';
+import { StyleSheet, Text, View, TouchableHighlight} from 'react-native';
 import React, { useState, useEffect, Component } from 'react';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { deleteDish } from '../src/actions/dish'
 import { FontAwesome } from '@expo/vector-icons';
+import DetailsScreen from './details'
 
 
 function renderList() {
   const likedDishes = useSelector((state) => state.dishReducer.likedDishes)
   const dispatch = useDispatch();
+  const [dishDetails, setDishDetails] = useState(false);
+  const [dish, setDish] = useState(null);
 
-  console.log(likedDishes);
-  // const listItems = likedDishes.map((dish) => <li key={dish.data.id}>{dish.data.name} 
-  //     <Button onPress={() => dispatch(deleteDish(dish.key))}>
-        
-  //     </Button>
-  //   </li>);
-    const listItems = likedDishes.map((item) => (
-      <View key={item.data.id} style={styles.listItem}>
-        <Text>{item.data.name}</Text>
-        <FontAwesome name="remove" size={24} color="black" onPress={() => dispatch(deleteDish(item.key))} />
-      </View>
-    ));
-    return listItems;
+  const showDetails = (item) => {
+    setDish(item);
+    setDishDetails(true);
+  }
+
+    if(dishDetails) {
+      return (
+        <DetailsScreen setShowDishDetails={(p) => setDishDetails(p)} dish={dish.data}/>
+      )
+    }
+    else {
+      const listItems = likedDishes.map((item) => (
+        <View key={item.data.id} style={styles.listItem}>
+          <TouchableHighlight style={{width: '90%', height: '100%'}} onPress={() => showDetails(item)}>
+          <Text>{item.data.name}</Text>
+          </TouchableHighlight>
+          
+          <FontAwesome name="remove" size={24} color="black" onPress={() => dispatch(deleteDish(item.key))} />
+        </View>
+      ));
+      return listItems;
+    }
+    
 }
 
 function LikesScreen() {

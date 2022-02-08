@@ -8,10 +8,6 @@ import { FontAwesome } from '@expo/vector-icons';
 import DetailsScreen from './details'
 
 
-
-const SCREEN_HEIGHT = Dimensions.get("window").height;
-const SCREEN_WIDTH = Dimensions.get("window").width;
-
 const dishes = [
   {
     id: 0,
