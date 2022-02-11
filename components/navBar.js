@@ -11,7 +11,7 @@ const Tab = createMaterialTopTabNavigator();
 
 export default function navBar() {
     return (
-        <Tab.Navigator swipeEnabled={false}>
+        <Tab.Navigator swipeEnabled={false} style={{marginTop: 20}}>
             <Tab.Screen name="Discover" component={DiscoverScreen} />
             <Tab.Screen name="Likes" component={LikesScreen} />
             <Tab.Screen name="Cookbook" component={CookbookScreen} />
