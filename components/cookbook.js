@@ -64,7 +64,7 @@ export default function CookbookScreen() {
       marginTop: 10,
       marginBottom: 10,
       backgroundColor: "#fff",
-      borderRadius: "10px",
+      borderRadius: 10,
       justifyContent: "space-between",
       alignItems: "center",
     }

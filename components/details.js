@@ -12,7 +12,7 @@ export default function DetailsScreen(props) {
             <View>
                 <Text>{props.dish.name}</Text>
                 <FontAwesome name="star-o" size={24} color="white" onPress={() => dispatch(addToFavourites(props.dish))}/>
-                <Button onPress={() => props.setShowDishDetails(false)}/>
+                <Button title="back" onPress={() => props.setShowDishDetails(false)}/>
             </View>
         );
     }

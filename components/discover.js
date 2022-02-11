@@ -108,8 +108,10 @@ function renderDishes() {
             </TouchableHighlight>
             
             <Text style={{color: 'white'}}>
-              <div>{dish.price}</div>
-              <div>{dish.instructions}</div>
+              {dish.price}
+            </Text>
+            <Text style={{color: 'white'}}>
+              {dish.instructions}
             </Text>
             <View style={styles.buttons}>
               <FontAwesome name="remove" size={24} color="white" onPress={() => dislike()} />
@@ -131,7 +133,7 @@ function renderDishes() {
             }}
           >
             <Text>
-              <div>No more dishes</div>
+              No more dishes
             </Text>
           </Animated.View>
       );
