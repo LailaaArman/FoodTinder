@@ -42,15 +42,25 @@ const settings = [
   }
 ]
 
-function AccountScreen() {
-  const settingsState = settings;
+/*
+const switchComponent = settingsState.map((item) => {
+  const[switchState, setSwitchState] = useState(settings)
+  return (
+    <Switch value={switchState} onValueChange={ () => setSwitchState(prevState => !prevState)}/>
+  )
+})*/
 
+function renderSettings() {
+  const settingsState = settings;
+  const[switchState, setSwitchState] = useState(settings)
+  
   const listSettings = settingsState.map((item) => (
+    
     <View key={item.id} style={styles.setting}>
       <Text>{item.name}</Text>
       <Switch
-          onValueChange={()=> item.value = !item.value}
-          value={item.value}
+          onValueChange={()=> setSwitchState(prevState => !prevState)}
+          value={switchState}
       />
     </View>
   ));
@@ -58,6 +68,15 @@ function AccountScreen() {
   return listSettings;
 }
 
+
+
+function AccountScreen(){
+  return(
+  <View style={styles.container}>
+    {renderSettings()}
+  </View>
+  );
+}
 export default AccountScreen;
 
 const styles = StyleSheet.create({
