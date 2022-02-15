@@ -1,9 +1,9 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 
-import DiscoverScreen from './components/discover'
-import PreferenceScreen from './components/preferences'
+import DiscoverScreen from './components/discover';
+import PreferenceScreen from './components/preferences';
 
-import { StackNavigator } from 'react-navigation'
+import { createStackNavigator } from '@react-navigation/stack';
 
 export const Navigator = new StackNavigator({
   Discover: { screen: Discover },
@@ -20,4 +20,4 @@ class Nav extends Component {
   }
 }
       
-export default Nav
+export default Nav;

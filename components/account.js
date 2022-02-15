@@ -1,22 +1,41 @@
 import { StyleSheet, Text, View, TextInput, TouchableHighlight} from 'react-native';
 import * as React from 'react';
 import PreferenceScreen from './preferences';
+import DiscoverScreen from './discover';
+import { createStackNavigator } from '@react-navigation/stack';
+import { AppRegistry } from 'react-native-web';
+import { render } from 'react-dom';
  
 
-function OptionScreen() {
-    return (
-       <View style={styles.listItem}>
-         <TouchableHighlight onPress={() => this.props.navigation.navigate('Preference')}>
-        <Text>Preferences</Text>
-        </TouchableHighlight>
-      </View>
-    );
+const Stack = createStackNavigator();
+
+function MyStack() {
+  return (
+    <View style={styles.listItem}>
+    <Stack.Navigator>
+       
+      <Stack.Screen name="Preferences" component={PreferenceScreen} />
+      <Stack.Screen name="Discover" component={DiscoverScreen} />
+      
+    </Stack.Navigator>
+    </View>
+  
+  );
 }
+
+/*
+function render() {
+  return (
+     <View style={styles.listItem}>
+       {MyStack()}
+    </View>
+  );
+}*/
   
 function AccountScreen() {
     return (
       <View style={styles.container}>
-        {OptionScreen()}
+        {MyStack()}
       </View>
     );
   }
