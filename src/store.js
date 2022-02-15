@@ -4,8 +4,7 @@ import cookbookReducer from './reducers/cookbookReducer';
 
 const rootReducer = combineReducers({
     dishReducer: dishReducer,
-    cookbookReducer: cookbookReducer,
-    accountReducer: accountReducer
+    cookbookReducer: cookbookReducer
 })
 
 export const store = createStore(rootReducer);

@@ -1,36 +1,61 @@
-import { StyleSheet, Text, View, Switch} from 'react-native';
-import * as React from 'react';
+import { StyleSheet, Text, View, Switch, List} from 'react-native';
+import React, { useState, useEffect, Component } from 'react';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { FontAwesome } from '@expo/vector-icons';
-import * as Settings from '../src/actions/settings';
 
-// State management
-function renderSettings() {
-  const [lunch, setLunch] = useState(false);
-  const toggleLunch = () => setLunch(previousState => !previousState);
-  const dispatch = useDispatch();
-
-  return (
-    <View style={styles.setting}>
-      <Text>Lunch</Text>
-      <Switch
-        trackColor={{ false: "#767577", true: "#81b0ff" }}
-        thumbColor={isEnabled ? "#f5dd4b" : "#f4f3f4"}
-        ios_backgroundColor="#3e3e3e"
-        onValueChange={toggleLunch}
-        value={isEnabled}
-      />
-    </View>
-  )
-}
+const settings = [
+  {
+    id: 0,
+    name: "Breakfast",
+    value: true
+  },
+  {
+    id: 1,
+    name: "Lunch",
+    value: true
+  },
+  {
+    id: 2,
+    name: "Dinner",
+    value: true
+  },
+  {
+    id: 3,
+    name: "Vegetarian",
+    value: true
+  },
+  {
+    id: 4,
+    name: "Vegan",
+    value: true
+  },
+  {
+    id: 5,
+    name: "Lactose free",
+    value: true
+  },
+  {
+    id: 6,
+    name: "Nut free",
+    value: true
+  }
+]
 
 function AccountScreen() {
-  return (
-    <View style={styles.container}>
-      {renderSettings()}
+  const settingsState = settings;
+
+  const listSettings = settingsState.map((item) => (
+    <View key={item.id} style={styles.setting}>
+      <Text>{item.name}</Text>
+      <Switch
+          onValueChange={()=> item.value = !item.value}
+          value={item.value}
+      />
     </View>
-  );
+  ));
+
+  return listSettings;
 }
 
 export default AccountScreen;
