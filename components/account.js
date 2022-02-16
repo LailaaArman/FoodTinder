@@ -4,71 +4,32 @@ import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { FontAwesome } from '@expo/vector-icons';
 
-const settings = [
-  {
-    id: 0,
-    name: "Breakfast",
-    value: true
-  },
-  {
-    id: 1,
-    name: "Lunch",
-    value: true
-  },
-  {
-    id: 2,
-    name: "Dinner",
-    value: true
-  },
-  {
-    id: 3,
-    name: "Vegetarian",
-    value: true
-  },
-  {
-    id: 4,
-    name: "Vegan",
-    value: true
-  },
-  {
-    id: 5,
-    name: "Lactose free",
-    value: true
-  },
-  {
-    id: 6,
-    name: "Nut free",
-    value: true
-  }
-]
-
-/*
-const switchComponent = settingsState.map((item) => {
-  const[switchState, setSwitchState] = useState(settings)
-  return (
-    <Switch value={switchState} onValueChange={ () => setSwitchState(prevState => !prevState)}/>
-  )
-})*/
-
 function renderSettings() {
-  const settingsState = settings;
-  const[switchState, setSwitchState] = useState(settings)
-  
-  const listSettings = settingsState.map((item) => (
-    
+  const [settings, setSettings] = useState([
+    {id: 0, name: "Breakfast",    value: true},
+    {id: 1, name: "Lunch",        value: true},
+    {id: 2, name: "Dinner",       value: true},
+    {id: 3, name: "Vegetarian",   value: true},
+    {id: 4, name: "Vegan",        value: true},
+    {id: 5, name: "Lactose free", value: true},
+    {id: 6, name: "Nut free",     value: true}
+  ])
+
+  const listSettings = settings.map((item) => (
     <View key={item.id} style={styles.setting}>
       <Text>{item.name}</Text>
       <Switch
-          onValueChange={()=> setSwitchState(prevState => !prevState)}
-          value={switchState}
+          value={item.value}
+          onValueChange={() => {
+              item.value = !item.value;
+              setSettings([...settings]);
+              console.log(settings);
+          }}
       />
     </View>
   ));
-
   return listSettings;
 }
-
-
 
 function AccountScreen(){
   return(
@@ -103,3 +64,22 @@ const styles = StyleSheet.create({
     alignItems: "center",
   }
 })
+
+
+// const settingsArray = [
+//   {id: 0, name: "Breakfast", value: true},
+//   {id: 1, name: "Lunch", value: true},
+//   {id: 2, name: "Dinner", value: true},
+//   {id: 3, name: "Vegetarian", value: true},
+//   {id: 4, name: "Vegan", value: true},
+//   {id: 5, name: "Lactose free", value: true},
+//   {id: 6, name: "Nut free", value: true}
+// ]
+
+// const [breakfast, setBreakfast] = useState(settings[0].value);
+// const [lunch, setLunch] = useState(settings[1].value);
+// const [dinner, setDinner] = useState(settings[2].value);
+// const [vegetarian, setVegetarian] = useState(settings[3].value);
+// const [vegan, setBreakfast] = useState(settings[4].value);
+// const [lactoseFree, setLactoseFree] = useState(settings[5].value);
+// const [nutFree,setNutFree] = useState(settings[6].value);
