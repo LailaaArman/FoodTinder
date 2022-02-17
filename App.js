@@ -17,7 +17,7 @@ const App = (props) => {
           </NavigationContainer>
       </Provider>
     );
-  
+
 }
 
 export default App;
