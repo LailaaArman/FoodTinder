@@ -5,8 +5,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import NavBar from './components/navBar';
 import { Provider } from 'react-redux';
 import { store } from './src/store';
-import DiscoverScreen from './components/discover';
-import PreferenceScreen from './components/preferences';
+
 
 
 
