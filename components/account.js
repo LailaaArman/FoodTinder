@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, Switch, List} from 'react-native';
+import { StyleSheet, Text, View, Switch, FlatList } from 'react-native';
 import React, { useState, useEffect, Component } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { setPreferences } from '../src/actions/preferences';
@@ -15,14 +15,15 @@ function renderPreferences() {
       <Switch
           value={preference.value}
           onValueChange={() => {
-              preference.value = !preference.value
-              dispatch(setPreferences(state))
+              //preference.value = !preference.value
+              dispatch(setPreferences((preference.value) => value))
               console.log("Something happened!")
               console.log(state)
           }}
       />
     </View>
   ));
+
   return listPreferences;
 }
 
