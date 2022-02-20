@@ -16,50 +16,35 @@ import { useDispatch } from "react-redux";
 import { addDish } from "../src/actions/dish";
 import { FontAwesome } from "@expo/vector-icons";
 import DetailsScreen from "./details";
+import { getRandomRecipie } from "./API";
+import { get } from "react-native/Libraries/Utilities/PixelRatio";
 
-function getRandomRecipie() {
-  const [randomRecipie, setRandomRecipie] = useState(null);
-  const [data, setData] = useState([]);
-  fetch(
-    `https://api.spoonacular.com/recipes/random?apiKey=fa9a241528c64060acc676e26a8b19fb`
-  )
-    .then((response) => response.json())
-    .then((data) => {
-      setRandomRecipie(data);
-    })
-    .catch(() => {
-      console.log("error getting random recipie");
-    });
-  console.log(data);
-  return data;
-}
-
-const dishes = [
-  {
-    id: 0,
-    name: "tacos",
-    price: "80kr",
-    instructions: "slice some cucumber",
-    uri: require("../assets/dishes/tacos.jpg"),
-  },
-  {
-    id: 1,
-    name: "Stuvade makaroner",
-    price: "70kr",
-    instructions: "stuva makaronerna",
-    uri: require("../assets/dishes/stuvademakaroner.jpg"),
-  },
-  {
-    id: 2,
-    name: "Ris med wok",
-    price: "85kr",
-    instructions: "wooka grönsakerna",
-    uri: require("../assets/dishes/wok.jpeg"),
-  },
-];
+// const dishes = [
+//   {
+//     id: 0,
+//     name: "tacos",
+//     price: "80kr",
+//     instructions: "slice some cucumber",
+//     uri: require("../assets/dishes/tacos.jpg"),
+//   },
+//   {
+//     id: 1,
+//     name: "Stuvade makaroner",
+//     price: "70kr",
+//     instructions: "stuva makaronerna",
+//     uri: require("../assets/dishes/stuvademakaroner.jpg"),
+//   },
+//   {
+//     id: 2,
+//     name: "Ris med wok",
+//     price: "85kr",
+//     instructions: "wooka grönsakerna",
+//     uri: require("../assets/dishes/wok.jpeg"),
+//   },
+// ];
 
 function renderDishes() {
-  const [dish, setDish] = useState(dishes[0]);
+  const [dish, setDish] = useState(getRandomRecipie());
   const [showDetailsView, setShowDishDetails] = useState(false);
   const dispatch = useDispatch();
 
@@ -71,13 +56,14 @@ function renderDishes() {
         console.log("Swiped Right");
         dispatch(addDish(dish));
         index++;
-        setDish(dishes[index]);
+        setDish(getRandomRecipie());
+        <getRandomRecipie />;
       }
       //swiping left
       else if (nativeEvent.translationX > 225) {
         console.log("Swiped Left");
         index++;
-        setDish(dishes[index]);
+        setDish(getRandomRecipie());
       }
     }
   };
@@ -87,29 +73,29 @@ function renderDishes() {
     console.log("Liked");
     dispatch(addDish(dish));
     index++;
-    setDish(dishes[index]);
+    setDish(getRandomRecipie());
   };
 
   const dislike = () => {
     let index = dish.id;
     console.log("Disliked");
     index++;
-    setDish(dishes[index]);
+    setDish(getRandomRecipie());
   };
 
-  const showDetails = (dish) => {
-    console.log(dish);
-    setShowDishDetails(true);
-  };
+  // const showDetails = (dish) => {
+  //   console.log(dish);
+  //   setShowDishDetails(true);
+  // };
 
-  if (showDetailsView) {
-    return (
-      <DetailsScreen
-        setShowDishDetails={(p) => setShowDishDetails(p)}
-        dish={dish}
-      />
-    );
-  }
+  // if (showDetailsView) {
+  //   return (
+  //     <DetailsScreen
+  //       setShowDishDetails={(p) => setShowDishDetails(p)}
+  //       dish={dish}
+  //     />
+  //   );
+  // }
 
   if (dish != undefined) {
     return (
@@ -131,12 +117,12 @@ function renderDishes() {
                 width: 500,
                 borderRadius: 20,
               }}
-              source={dish.uri}
+              source={dish.image}
             />
           </TouchableHighlight>
 
-          <Text style={{ color: "white" }}>{dish.price}</Text>
-          <Text style={{ color: "white" }}>{dish.instructions}</Text>
+          <Text style={{ color: "white" }}>TestPrice</Text>
+          <Text style={{ color: "white" }}>TestInstructions</Text>
           <View style={styles.buttons}>
             <FontAwesome
               name="remove"

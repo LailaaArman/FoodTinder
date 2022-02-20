@@ -1,13 +1,23 @@
-const APIKEY = fa9a241528c64060acc676e26a8b19fb;
-
-function getRandomRecipie() {
-  fetch(`https://api.spoonacular.com/recipes/random?apiKey=${APIKEY}`)
-    .then((response) => response.json())
-    .then((data) => {
-      setRandomRecipie(data);
-      console.log(data);
-    })
-    .catch(() => {
-      console.log("error getting random recipie");
-    });
-}
+const dishes = [
+  {
+    id: 0,
+    name: "tacos",
+    price: "80kr",
+    instructions: "slice some cucumber",
+    uri: require("../assets/dishes/tacos.jpg"),
+  },
+  {
+    id: 1,
+    name: "Stuvade makaroner",
+    price: "70kr",
+    instructions: "stuva makaronerna",
+    uri: require("../assets/dishes/stuvademakaroner.jpg"),
+  },
+  {
+    id: 2,
+    name: "Ris med wok",
+    price: "85kr",
+    instructions: "wooka grönsakerna",
+    uri: require("../assets/dishes/wok.jpeg"),
+  },
+];
