@@ -6,7 +6,7 @@ import { useDispatch } from 'react-redux';
 import { addDish } from '../src/actions/dish'
 import { FontAwesome } from '@expo/vector-icons';
 import DetailsScreen from './details'
-
+import { preferenceReducer } from '../src/reducers/preferenceReducer';
 
 const dishes = [
   {
@@ -36,7 +36,10 @@ function renderDishes() {
   const [dish, setDish] = useState(dishes[0]);
   const [showDetailsView, setShowDishDetails] = useState(false);
   const dispatch = useDispatch();
-  
+
+  // For the search settings
+  const state = useSelector(state => state.preferenceReducer)
+
   const handleSwipe=({nativeEvent}) =>{
       //swiping right
       if (dish != undefined) {
@@ -54,9 +57,9 @@ function renderDishes() {
           setDish(dishes[index])
         }
       }
-      
+
     }
-    
+
     const like = () => {
       let index = dish.id;
       console.log("Liked")
@@ -96,7 +99,7 @@ function renderDishes() {
               backgroundColor: "#6D49CF",
             }}
           >
-            <TouchableHighlight onPress={() => showDetails(dish)}>
+            <TouchableHighlight onPress={() => {console.log(state)}}>
               <Image
                 style={{
                   height: 400,
@@ -106,7 +109,7 @@ function renderDishes() {
                 source={dish.uri}
               />
             </TouchableHighlight>
-            
+
             <Text style={{color: 'white'}}>
               {dish.price}
             </Text>
@@ -116,7 +119,7 @@ function renderDishes() {
             <View style={styles.buttons}>
               <FontAwesome name="remove" size={24} color="white" onPress={() => dislike()} />
               <FontAwesome name="heart-o" size={24} color="white" onPress={() => like()}/>
-            </View>    
+            </View>
           </Animated.View>
         </PanGestureHandler>
       );
@@ -138,7 +141,7 @@ function renderDishes() {
           </Animated.View>
       );
     }
-  
+
 }
 
 function DiscoverScreen() {
@@ -154,12 +157,12 @@ export default DiscoverScreen;
 const styles = StyleSheet.create({
     container: {
         backgroundColor: "#6D49CF",
-        flex: 1, 
-        justifyContent: "center", 
+        flex: 1,
+        justifyContent: "center",
         alignItems: "center"
     },
     buttons: {
-      flex: 1, 
+      flex: 1,
       flexDirection: "row",
       justifyContent: "space-between",
       width: "90%",

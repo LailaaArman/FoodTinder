@@ -22,7 +22,7 @@ const preferenceReducer = (state = initialState, action) => {
 
         const newState = [...state.preferences]; //making a new array
 
-        newState[index].value = !newState[index].value; //changing value in the new array
+        //newState[index].value = !newState[index].value; //changing value in the new array
 
         return {
          ...state, //copying the orignal state
@@ -33,18 +33,6 @@ const preferenceReducer = (state = initialState, action) => {
        default:
             return state
     }
-     /*
-    // Find index of a setting in the state array
-    const index = state.preferences.findIndex(preference => preference.id !== action.payload );
-
-    const newState = [...state.preferences];
-
-    // Setting the state by flipping switch, hence the inverted value
-    newState[index].value = !newState[index].value;
-
-    return {...state, preferences: newState }
-    */
-
 }
 
 export default preferenceReducer;
