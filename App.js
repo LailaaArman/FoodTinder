@@ -1,10 +1,12 @@
 import { StyleSheet, Text, View, TextInput, TouchableOpacity} from 'react-native';
 import React, {Component} from 'react';
-import { NavigationContainer } from '@react-navigation/native';
+import { NavigationContainer} from '@react-navigation/native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import NavBar from './components/navBar';
 import { Provider } from 'react-redux';
 import { store } from './src/store';
+
+
 
 
 
@@ -17,10 +19,13 @@ const App = (props) => {
           </NavigationContainer>
       </Provider>
     );
-  
+
 }
 
 export default App;
+
+
+
 
 const styles = StyleSheet.create({
   container: {
