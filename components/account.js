@@ -15,8 +15,8 @@ function renderPreferences() {
       <Switch
           value={preference.value}
           onValueChange={() => {
-              //preference.value = !preference.value
-              dispatch(setPreferences((preference.value) => value))
+              preference.value = !preference.value
+              dispatch(setPreferences(state))
               console.log("Something happened!")
               console.log(state)
           }}
