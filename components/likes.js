@@ -27,7 +27,7 @@ function renderList() {
       const listItems = likedDishes.map((item) => (
         <View key={item.data.id} style={styles.listItem}>
           <TouchableHighlight style={{width: '90%', height: '100%'}} onPress={() => showDetails(item)}>
-          <Text>{item.data.name}</Text>
+          <Text>{item.data.title}</Text>
           </TouchableHighlight>
           
           <FontAwesome name="remove" size={24} color="black" onPress={() => dispatch(deleteDish(item.key))} />

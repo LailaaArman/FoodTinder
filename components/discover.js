@@ -6,7 +6,9 @@ import { useDispatch } from 'react-redux';
 import { addDish } from '../src/actions/dish'
 import { FontAwesome } from '@expo/vector-icons';
 import DetailsScreen from './details'
+import spoonacularApi from '../src/spoonacularApi';
 import { preferenceReducer } from '../src/reducers/preferenceReducer';
+
 
 const dishes = [
   {
@@ -33,8 +35,10 @@ const dishes = [
 ];
 
 function renderDishes() {
-  const [dish, setDish] = useState(dishes[0]);
+  const [dish, setDish] = useState(null);
+  const [searchedDishes, setSearchedDishes] = useState([]);
   const [showDetailsView, setShowDishDetails] = useState(false);
+  const [search, setSearch] = useState(true);
   const dispatch = useDispatch();
 
   // For the search settings
@@ -61,18 +65,38 @@ function renderDishes() {
     }
 
     const like = () => {
-      let index = dish.id;
       console.log("Liked")
       dispatch(addDish(dish))
-      index++
-      setDish(dishes[index])
+      setDish(searchedDishes.shift())
+      if(searchedDishes.length < 1) {
+        setSearch(true);
+      }
     }
 
     const dislike = () => {
-      let index = dish.id;
       console.log("Disliked")
-      index++
-      setDish(dishes[index])
+      setDish(searchedDishes.shift())
+      if(searchedDishes.length < 1) {
+        setSearch(true);
+      }
+    }
+
+    const searchDishes = () => {
+      console.log('test');
+      spoonacularApi.getNewDishes()
+        .then(response => {
+          setDish(response.shift());
+          setSearchedDishes(response);
+        });
+    }
+
+    console.log(dish);
+    console.log(searchedDishes);
+    if(searchedDishes.length < 1) {
+      if(search) {
+        searchDishes();
+        setSearch(false);
+      }
     }
 
     const showDetails = (dish) => {
@@ -106,15 +130,15 @@ function renderDishes() {
                   width: 500,
                   borderRadius: 20,
                 }}
-                source={dish.uri}
+                source={dish.image}
               />
             </TouchableHighlight>
 
             <Text style={{color: 'white'}}>
-              {dish.price}
+              {dish.aggregateLikes}
             </Text>
             <Text style={{color: 'white'}}>
-              {dish.instructions}
+              {dish.title}
             </Text>
             <View style={styles.buttons}>
               <FontAwesome name="remove" size={24} color="white" onPress={() => dislike()} />
