@@ -7,30 +7,58 @@ import { addToFavourites } from '../src/actions/cookbook'
 export default function DetailsScreen(props) {
 
     const dispatch = useDispatch();
-    if (props.dish != null) {
-        return (
-            <View>
-                <Image
-                style={{
-                  height: 400,
-                  width: 500,
-                  borderRadius: 20,
-                }}
-                source={props.dish.image}
-              />
-                <Text>{props.dish.title}</Text>
-                <FontAwesome name="star-o" size={24} color="white" onPress={() => dispatch(addToFavourites(props.dish))}/>
-                <Button title="back" onPress={() => props.setShowDishDetails(false)}/>
-            </View>
-        );
+    if (props.likeable) {
+        if (props.dish != null) {
+            return (
+                <View>
+                    <Image
+                    style={{
+                      height: 400,
+                      width: 500,
+                      borderRadius: 20,
+                    }}
+                    source={props.dish.image}
+                  />
+                    <Text>{props.dish.title}</Text>
+                    <FontAwesome name="star-o" size={24} color="white" onPress={() => dispatch(addToFavourites(props.dish))}/>
+                    <Button title="back" onPress={() => props.setShowDishDetails(false)}/>
+                </View>
+            );
+        }
+        else {
+            return (
+                <View>
+                    <Text>No dish to show</Text>
+                </View>
+            )
+        }
     }
     else {
-        return (
-            <View>
-                <Text>Ingen dish</Text>
-            </View>
-        )
+        if (props.dish != null) {
+            return (
+                <View>
+                    <Image
+                    style={{
+                      height: 400,
+                      width: 500,
+                      borderRadius: 20,
+                    }}
+                    source={props.dish.image}
+                  />
+                    <Text>{props.dish.title}</Text>
+                    <Button title="back" onPress={() => props.setShowDishDetails(false)}/>
+                </View>
+            );
+        }
+        else {
+            return (
+                <View>
+                    <Text>No dish to show</Text>
+                </View>
+            )
+        }
     }
+    
 
     
 }

@@ -19,7 +19,7 @@ function renderList() {
   console.log(dish);
   if(dishDetails) {
     return (
-      <DetailsScreen setShowDishDetails={(p) => setDishDetails(p)} dish={dish.data}/>
+      <DetailsScreen likeable={false} setShowDishDetails={(p) => setDishDetails(p)} dish={dish.data}/>
     )
   }
   else {

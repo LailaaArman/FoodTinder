@@ -106,7 +106,7 @@ function renderDishes() {
 
     if(showDetailsView) {
       return (
-        <DetailsScreen setShowDishDetails={(p) => setShowDishDetails(p)} dish={dish}/>
+        <DetailsScreen likeable={true} setShowDishDetails={(p) => setShowDishDetails(p)} dish={dish}/>
       )
     }
 
@@ -123,7 +123,7 @@ function renderDishes() {
               backgroundColor: "#6D49CF",
             }}
           >
-            <TouchableHighlight onPress={() => {console.log(state)}}>
+            <TouchableHighlight onPress={() => showDetails(dish)}>
               <Image
                 style={{
                   height: 400,
