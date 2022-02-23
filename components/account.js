@@ -17,8 +17,6 @@ function renderPreferences() {
           onValueChange={() => {
               preference.value = !preference.value
               dispatch(setPreferences(state))
-              console.log("Something happened!")
-              console.log(state)
           }}
       />
     </View>

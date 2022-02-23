@@ -6,7 +6,6 @@ const initialState = {
 }
 
 const cookbookReducer = (state = initialState, action) => {
-    console.log(action)
     switch(action.type) {
         case ADD_FAVOURITE:
             return {...state, 

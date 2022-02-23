@@ -6,7 +6,6 @@ const initialState = {
 }
 
 const dishReducer = (state = initialState, action) => {
-    console.log(action)
     switch(action.type) {
         case ADD_DISH:
             return {...state, 

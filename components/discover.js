@@ -58,8 +58,7 @@ function renderDishes() {
     }
 
     const searchDishes = (params) => {
-      console.log('test');
-      spoonacularApi.getNewDishes(params)
+        spoonacularApi.getNewDishes(params)
         .then(response => {
           // block repeated api calls if no results are found with the current settings
           if (response.length > 1) {
@@ -74,6 +73,7 @@ function renderDishes() {
 
     console.log(dish);
     console.log(searchedDishes);
+    console.log(search)
     if(searchedDishes.length < 1) {
       if(search) {
         searchDishes(preferencesState);
