@@ -1,6 +1,10 @@
 import {BASE_URL, API_KEY} from './apiConfig';
+import { useSelector } from 'react-redux';
 
 const spoonacularApi = {
+    // For the search settings
+  
+
     makeGetRequest(params) {
         console.log(BASE_URL+params)
         return fetch(BASE_URL+params) 
@@ -14,7 +18,19 @@ const spoonacularApi = {
        },
 
     getNewDishes(params) {
-        return spoonacularApi.makeGetRequest("recipes/random?apiKey="+ API_KEY + "&number=5")
+
+        let url = "recipes/random?apiKey="+ API_KEY + "&number=5";
+        let noPreferences = true;
+        params.preferences.forEach(preference => {
+            if(preference.value && noPreferences) {
+                url += "&tags=" + preference.name;
+                noPreferences = false;
+            }
+            else if(preference.value && !noPreferences) {
+                url += "," + preference.name;
+            }
+        })
+        return spoonacularApi.makeGetRequest(url)
         .then(response => response.recipes)
     }
 }

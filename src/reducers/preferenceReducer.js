@@ -2,14 +2,13 @@ import { SET_PREFERENCES } from '../actions/types';
 
 const initialState = {
   preferences: [
-    {id: 0, name: "Test",         value: false},
-    {id: 1, name: "Breakfast",    value: true},
-    {id: 2, name: "Lunch",        value: true},
-    {id: 3, name: "Dinner",       value: true},
-    {id: 4, name: "Vegetarian",   value: true},
-    {id: 5, name: "Vegan",        value: true},
-    {id: 6, name: "Lactose free", value: true},
-    {id: 7, name: "Nut free",     value: true}
+    {id: 1, name: "breakfast",    value: false},
+    {id: 2, name: "lunch",        value: false},
+    {id: 3, name: "dinner",       value: false},
+    {id: 4, name: "vegetarian",   value: false},
+    {id: 5, name: "vegan",        value: false},
+    {id: 6, name: "dairy free",   value: false},
+    {id: 7, name: "nut free",     value: false},
   ]
 }
 

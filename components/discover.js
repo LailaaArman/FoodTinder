@@ -10,29 +10,6 @@ import spoonacularApi from '../src/spoonacularApi';
 import { preferenceReducer } from '../src/reducers/preferenceReducer';
 
 
-const dishes = [
-  {
-    id: 0,
-    name: "tacos",
-    price: "80kr",
-    instructions: "slice some cucumber",
-    uri: require("../assets/dishes/tacos.jpg"),
-  },
-  {
-    id: 1,
-    name: "Stuvade makaroner",
-    price: "70kr",
-    instructions: "stuva makaronerna",
-    uri: require("../assets/dishes/stuvademakaroner.jpg"),
-  },
-  {
-    id: 2,
-    name: "Ris med wok",
-    price: "85kr",
-    instructions: "wooka grönsakerna",
-    uri: require("../assets/dishes/wok.jpeg"),
-  },
-];
 
 function renderDishes() {
   const [dish, setDish] = useState(null);
@@ -40,9 +17,8 @@ function renderDishes() {
   const [showDetailsView, setShowDishDetails] = useState(false);
   const [search, setSearch] = useState(true);
   const dispatch = useDispatch();
-
-  // For the search settings
-  const state = useSelector(state => state.preferenceReducer)
+  // preferences states
+  const preferencesState = useSelector(state => state.preferenceReducer);
 
   const handleSwipe=({nativeEvent}) =>{
       //swiping right
@@ -81,12 +57,18 @@ function renderDishes() {
       }
     }
 
-    const searchDishes = () => {
+    const searchDishes = (params) => {
       console.log('test');
-      spoonacularApi.getNewDishes()
+      spoonacularApi.getNewDishes(params)
         .then(response => {
-          setDish(response.shift());
-          setSearchedDishes(response);
+          // block repeated api calls if no results are found with the current settings
+          if (response.length > 1) {
+            setDish(response.shift());
+            setSearchedDishes(response);
+          }
+          else {
+            setSearch(false);
+          }
         });
     }
 
@@ -94,10 +76,11 @@ function renderDishes() {
     console.log(searchedDishes);
     if(searchedDishes.length < 1) {
       if(search) {
-        searchDishes();
+        searchDishes(preferencesState);
         setSearch(false);
       }
     }
+
 
     const showDetails = (dish) => {
       console.log(dish);
@@ -160,8 +143,10 @@ function renderDishes() {
             }}
           >
             <Text>
-              No more dishes
+              Change your preferences to try and search again.
             </Text>
+            <Text>Have you already changed your preferences? Press on the search below to try again.</Text>
+            <FontAwesome name="search" size={24} color="white" onPress={() => searchDishes(preferencesState)}/>
           </Animated.View>
       );
     }
