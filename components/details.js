@@ -12,12 +12,13 @@ export default function DetailsScreen(props) {
             return (
                 <View>
                     <Image
+                    resizeMode={'cover'}
                     style={{
-                      height: 400,
-                      width: 500,
+                      height: 200,
+                      width: 350,
                       borderRadius: 20,
                     }}
-                    source={props.dish.image}
+                    source={{uri: props.dish.image}}
                   />
                     <Text>{props.dish.title}</Text>
                     <FontAwesome name="star-o" size={24} color="white" onPress={() => dispatch(addToFavourites(props.dish))}/>
@@ -43,7 +44,7 @@ export default function DetailsScreen(props) {
                       width: 500,
                       borderRadius: 20,
                     }}
-                    source={props.dish.image}
+                    source={{uri: props.dish.image}}
                   />
                     <Text>{props.dish.title}</Text>
                     <Button title="back" onPress={() => props.setShowDishDetails(false)}/>

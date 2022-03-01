@@ -110,10 +110,10 @@ function renderDishes() {
               <Image
                 style={{
                   height: 400,
-                  width: 500,
+                  width: 350,
                   borderRadius: 20,
                 }}
-                source={dish.image}
+                source={{uri: dish.image}}
               />
             </TouchableHighlight>
 
